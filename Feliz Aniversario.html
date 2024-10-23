@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fira Sans Condensed', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #bcc4af;
+            color: #333;
+        }
+        .page-name {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            font-weight: normal;
+            color: #282d28;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        header {
+            background-color: #c2d6c0;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            height: 190px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('./imagenes/corazones.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.7; /* Ajusta este valor entre 0 y 1 para cambiar la opacidad */
+            z-index: 0;
+        }
+        header h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(255, 255, 255);
+            margin: 0;
+            font-style: normal;
+            text-shadow: 2px 2px 4px #aeaeae;
+            font-size: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        nav {
+            background-color: #9dac9d;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            flex: 1;
+            text-align: center;
+            margin: 0 100px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+            font-size: 20px;
+        }
+        nav ul li a:hover {
+            background-color: #8a998a;
+        }
+        @media (max-width: 1200px) {
+            nav ul li {
+                margin: 0 50px;
+            }
+        }
+        @media (max-width: 800px) {
+            nav ul li {
+                margin: 0 25px;
+            }
+        }
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+        }
+        
+        .contenido-principal {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .texto-container {
+            flex: 1;
+            margin-right: 50px;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .texto-blanco {
+            background-color: rgba(255, 255, 255, 0.8); /* Cambiado a rgba con 0.8 de opacidad */
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .imagen-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .fondo-imagen {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            background-color: rgba(166, 170, 160, 0.5); /* Cambiado a rgba con 0.5 de opacidad */
+            border-radius: 15px;
+            z-index: 0;
+        }
+        
+        .imagen-derecha {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .contenido-principal {
+                flex-direction: column;
+            }
+            
+            .texto-container {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .imagen-container {
+                justify-content: center;
+            }
+        }
+        
+        .texto-debajo-imagen {
+            text-align: right;
+            margin-top: 10px;
+            margin-right: 30px;
+            font-style: italic;
+            color: #333;
+            width: calc(100% - 30px);
+            font-size: 0.8em; /* Reducción del 20% del tamaño del texto */
+        }
+        
+        .imagen-izquierda-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .imagen-izquierda {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            /* Se ha eliminado la siguiente línea:
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            */
+        }
+        
+        .imagen-inferior-derecha {
+            position: absolute;
+            bottom: -80px;
+            right: 670px;
+            z-index: 1000;
+            transition: right 0.65s ease; /* Cambiado de 0.5s a 0.65s */
+            cursor: pointer;
+        }
+        
+        .imagen-inferior-derecha img {
+            max-width: 105px;
+            height: auto;
+            border-radius: 10px;
+            opacity: 0.7;
+        }
+        
+        #texto-oculto {
+            position: absolute;
+            bottom: -40px;
+            right: 250px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-style: italic;
+            width: 322px; /* Cambiado de 280px a 322px (280 * 1.15 = 322) */
+            font-size: 0.9em;
+        }
+        
+        .imagen-central {
+            position: absolute;
+            bottom: -130px; /* Cambiado de 120px a -130px */
+            left: calc(50% + 100px);
+            transform: translateX(-50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: 1001;
+        }
+        
+        .imagen-central img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        #contenido-carta-bonita {
+            background-image: url('./imagenes/fondo-xo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .carta-container {
+            position: relative;
+            max-width: 880px;
+            margin: 30px auto;
+            background: none;
+        }
+        
+        .carta-container::before {
+            content: none;
+        }
+        
+        .imagen-papel {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .texto-carta {
+            position: absolute;
+            top: 40px;
+            left: 55px;
+            right: 55px;
+            font-family: 'Handlee', cursive;
+            font-size: 19.8px;
+            color: #000;
+            line-height: 2.17;
+            z-index: 2;
+        }
+        
+        .galeria-fotos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 33.8px;
+            padding: 20px;
+            padding-bottom: 70px; /* Aumentado de 20px a 70px */
+        }
+        
+        .fila-fotos {
+            display: flex;
+            justify-content: center;
+            gap: 18.2px; /* Aumentado de 13px a 18.2px (40% más) */
+            flex-wrap: wrap;
+        }
+        
+        .foto-galeria {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .foto-galeria:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 1100px) {
+            .foto-galeria {
+                width: 150px;
+                height: 150px;
+            }
+            .fila-fotos {
+                gap: 15px; /* Ajustado proporcionalmente */
+            }
+        }
+        
+        @media (max-width: 800px) {
+            .foto-galeria {
+                width: 120px;
+                height: 120px;
+            }
+            .galeria-fotos {
+                gap: 26px; /* Reducido proporcionalmente para pantallas más pequeñas */
+            }
+        }
+        
+        .foto-container {
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .foto-flipper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .foto-container.flipped .foto-flipper {
+            transform: rotateY(180deg);
+        }
+
+        .foto-frente, .foto-dorso {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .foto-dorso {
+            background-color: #d4d5b1;
+            transform: rotateY(180deg);
+            padding: 10px;
+            text-align: center;
+            font-family: 'Handlee', cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .foto-dorso p {
+            margin: 5px 0;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 1100px) {
+            .foto-container {
+                width: 150px;
+                height: 150px;
+            }
+            .foto-dorso {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .foto-container {
+                width: 120px;
+                height: 120px;
+            }
+            .foto-dorso {
+                font-size: 0.8em;
+            }
+        }
+
+        body.highlights-background {
+            background-image: url('./imagenes/fondo-de-hl.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .fototeca-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .foto-album {
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            max-width: calc(25% - 10px);
+            height: auto;
+            object-fit: cover;
+        }
+
+        .foto-album:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1200px) {
+            .foto-album {
+                max-width: calc(33.33% - 10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .foto-album {
+                max-width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .foto-album {
+                max-width: 100%;
+            }
+        }
+
+        .texto-cierre {
+            font-style: italic;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            color: #333;
+            font-size: 1.1em;
+            font-family: 'Handlee', cursive;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="page-name">Para Mi Fabi</div>
+        <h1>Te Amo Mucho</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" id="feliz-aniversario">Feliz Aniversario</a></li>
+            <li><a href="#" id="carta-bonita">Carta Bonita</a></li>
+            <li><a href="#" id="nuestros-highlights">Nuestros Highlights</a></li>
+            <li><a href="#" id="fototeca">Fototeca</a></li>
+        </ul>
+    </nav>
+    <div id="contenido-original">
+        <div class="contenido-principal">
+            <div class="texto-container">
+                <div class="texto-blanco">
+                    <p>Esta página ha sido creada para su servidor con el fin de mostrar el mucho amor que le tengo y mostrar un poco de todo lo que pasó este año. 
+                        Aunque no sepa como usarlo, lo hice con el fin de que sepa que estoy feliz de tenerlo en mi vida desde que nos conocimos.
+                    </p>
+                </div>
+                <div class="imagen-izquierda-container">
+                    <img src="./imagenes/mapa.png" alt="Descripción de la imagen" class="imagen-izquierda">
+                </div>
+            </div>
+            <div class="imagen-container">
+                <div class="fondo-imagen"></div>
+                <img src="./imagenes/imagenes-5.png" alt="Imagen de amor con Fabi" class="imagen-derecha">
+            </div>
+        </div>
+        <p class="texto-debajo-imagen">(Agregué nuestras mejores fotos ok, no llores)</p>
+        
+        <div class="imagen-inferior-derecha" id="imagen-clickeable">
+            <img src="./imagenes/avioncito.png" alt="Imagen inferior derecha">
+        </div>
+        <p id="texto-oculto" style="display: none;">En total has recorrido casi 34 000 Km hasta ahora (1 viaje más y equivale a darle 1 vuelta al mundo)</p>
+        
+        <div class="imagen-central" id="imagen-central">
+            <img src="./imagenes/cara-amarilla.png" alt="Imagen central">
+        </div>
+    </div>
+    
+    <div id="contenido-highlights" style="display: none;">
+        <h2 style="text-align: center; font-family: 'Nunito', sans-serif; color: white; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 40px; margin-bottom: 30px; font-size: 2.4em; font-weight: 700;">NUESTROS DÍAS MÁS MONITOS</h2>
+        <div class="galeria-fotos">
+            <div class="fila-fotos">
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/1.jpeg" alt="Foto 1" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>09/05/2023</p>
+                            <p>Nuestra primera cita juntos</p>
+                            <p>y la mejor visita al teatro de la vida.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/2.jpeg" alt="Foto 2" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>15/05/2023</p>
+                            <p>La vez que hicimos ... de la nada</p>
+                            <p>Ese día te agarré mucha confianza</p>
+                            <p>Más de la que ya había</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/3.jpeg" alt="Foto 3" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>11/10/2023</p>
+                            <p>En verdad llegaste 2 días antes.</p>
+                            <p>Pero ese día fuimos a Fridays c: y me gusta pasear contigo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/4.jpeg" alt="Foto 4" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>23/10/2023</p>
+                            <p>El día que me llevaste a un full day.</p>
+                            <p>Siempre recuerdo bonito ese día porque planificaste todo bonito para pedirme para estar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/5.jpeg" alt="Foto 5" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>31/10/2023</p>
+                            <p>Ese día llegamos a Brasil, fuimos los mejores guerreros de diosito para llegar al airbnb pero solucionamos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fila-fotos">
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/6.jpeg" alt="Foto 6" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>06/11/2023</p>
+                            <p>Después de sobrevivir a Kendrick nos fuimos al acuario. Esta foto es para recordar a esos 2 momentos en verdad.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/7.jpeg" alt="Foto 7" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>07/11/2023</p>
+                            <p>El día que fuimos al MOMA y me mataste de hambre pero me gusta pensar que todos los días hacíamos cosas bonitas y lo organizados que podemos ser si nos juntamos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/8.jpeg" alt="Foto 8" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>08/11/2023</p>
+                            <p>Cuando fuimos a Ipiranga, el museo más bonito que he visto en mi vida FR hasta el momento. TOP highlight de Brasil.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/9.jpeg" alt="Foto 9" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>09/11/2023</p>
+                            <p>El día que fuimos locasos a comer ASAÍ, el mejor sistema de helados es el de Sao Paulo lo firmo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/10.jpeg" alt="Foto 10" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>14/11/2023</p>
+                            <p>Cuando llegamos a Ubatuba y ha sido el mejor fin de semana que hemos tenido de solo descansar e ir a la playita.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fila-fotos">
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/11.jpeg" alt="Foto 11" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>14/02/2024</p>
+                            <p>Nuestro primer San Valentín, a pesar que estuvimos lejos uwu.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/11-5.jpeg" alt="Nueva Foto" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>22/05/2024</p>
+                            <p>En ese viaje llegaste el 04/05/2024 PERO de ese viaje quise poner el día que fuimos al Oso Panda porque AMO ese chifa csm y porque es mi página ante todo ok 😡.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/12.jpeg" alt="Foto 12" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>15/07/2024</p>
+                            <p>Cuando por finnn volviste y te hice la cenita bonita. Amo cocinarte y que te guste mis comiditas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/13.jpeg" alt="Foto 13" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>23/07/2024</p>
+                            <p>Nuestra cita bonita de mesiversario yendo a Museo Larco. Amo cuando me planeas citas y cosas TE AMO.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="foto-container">
+                    <div class="foto-flipper">
+                        <img src="./imagenes/14.jpeg" alt="Foto 14" class="foto-galeria foto-frente">
+                        <div class="foto-dorso">
+                            <p>Esta no tiene fecha porque es la compilación de todas las cartas y regalos que me has enviado en este año (y más).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="contenido-fototeca" style="display: none;">
+        <div class="fototeca-container">
+            <!-- Aquí se agregarán las 48 imágenes dinámicamente con JavaScript -->
+        </div>
+        <p class="texto-cierre">Gracias por compartir este hermoso año conmigo, lleno de risas, amor y aventuras. Que nuestro álbum siga creciendo con más recuerdos bonitos como nosotros. Te amo, Fabi. ❤️</p>
+    </div>
+    
+    <div id="contenido-carta-bonita" style="display: none;">
+        <div class="carta-container">
+            <img src="./imagenes/fondo-carta.png" alt="Papel de carta" class="imagen-papel">
+            <div class="texto-carta">
+                <p>Querido Fabi,</p>
+                <p>Estoy muy feliz por haber logrado 1 año contigo y a pesar de que pueda sonar muy poquito</p>
+                <p>para algunos, nadie sabrá todo lo que nos ha costado y estoy segura de que serán muchos más.</p>
+                <p>Siento que hemos crecido bastante y hemos sentado unas bases muy fuertes (Macizas como boby)</p>
+                <p>para que de aquí en adelante se sienta todo más fácil. </p>
+                <p>Espero que sigamos aprendiendo y creciendo juntos y que todo lo que nos está costando estar</p>
+                <p>lejos sea recompensado en nuestro futuro juntos.</p>
+                <p>Te amo mucho, igual que la cantidad de px que tiene esta página,y siempre lo haré pase lo</p>
+                <p>que pase (Pero manifestando a que pase lo mejor para ambos siempre)</p>
+                <p>Espero que te guste mucho esta sorpresa que es parte de otras sorpresas más</p>
+                <p>Te juro que yo solita lo estoy escribiendo aunque la IA no deja de meterse en mi carta y</p>
+                <p>expresa su amor hacia ti mejor que yo JAJAJA.</p>
+                <p>Ya te quiero ver de nuevo y que pase el tiempo volando hasta entonces pero que no sea</p>
+                <p>así cuando estés aquí, ya tengo tus turrones separados y criogenizados.</p>
+                <p>Espero que te guste mucho esta cartita y TODO.</p>
+                <p>Para mi mejor amigo y mejor novio y compañerito de vida para siempre...</p>
+                <p>Hildis.❤️</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let imagenMovida = false;
+        const imagenClickeable = document.getElementById('imagen-clickeable');
+        const textoOculto = document.getElementById('texto-oculto');
+        const imagenCentral = document.getElementById('imagen-central');
+
+        imagenClickeable.addEventListener('click', function() {
+            if (!imagenMovida) {
+                this.style.right = '100px';
+                setTimeout(() => {
+                    textoOculto.style.display = 'block';
+                    setTimeout(() => {
+                        imagenCentral.style.transform = 'translateX(-50%) scale(1)';
+                    }, 500);
+                }, 325);
+            } else {
+                this.style.right = '670px';
+                textoOculto.style.display = 'none';
+                imagenCentral.style.transform = 'translateX(-50%) scale(0)';
+            }
+            imagenMovida = !imagenMovida;
+        });
+
+        const felizAniversario = document.getElementById('feliz-aniversario');
+        const cartaBonita = document.getElementById('carta-bonita');
+        const nuestrosHighlights = document.getElementById('nuestros-highlights');
+        const fototeca = document.getElementById('fototeca');
+        const contenidoOriginal = document.getElementById('contenido-original');
+        const contenidoHighlights = document.getElementById('contenido-highlights');
+        const contenidoFototeca = document.getElementById('contenido-fototeca');
+        const contenidoCartaBonita = document.getElementById('contenido-carta-bonita');
+        const bodyElement = document.body;
+        const colorOriginal = getComputedStyle(bodyElement).backgroundColor;
+
+        cartaBonita.addEventListener('click', function(e) {
+            e.preventDefault();
+            contenidoOriginal.style.display = 'none';
+            contenidoHighlights.style.display = 'none';
+            contenidoFototeca.style.display = 'none';
+            contenidoCartaBonita.style.display = 'block';
+            bodyElement.style.backgroundColor = '#dce2d3'; // Cambiado de '#dbe2cf' a '#dce2d3'
+            removeHighlightsBackground();
+        });
+
+        felizAniversario.addEventListener('click', function(e) {
+            e.preventDefault();
+            contenidoOriginal.style.display = 'block';
+            contenidoHighlights.style.display = 'none';
+            contenidoFototeca.style.display = 'none';
+            contenidoCartaBonita.style.display = 'none';
+            bodyElement.style.backgroundColor = '#bcc4af'; // Cambiado de '#cad0c0' a '#bcc4af'
+            removeHighlightsBackground();
+        });
+
+        nuestrosHighlights.addEventListener('click', function(e) {
+            e.preventDefault();
+            contenidoOriginal.style.display = 'none';
+            contenidoHighlights.style.display = 'block';
+            contenidoFototeca.style.display = 'none';
+            contenidoCartaBonita.style.display = 'none';
+            bodyElement.style.backgroundColor = 'rgba(196, 202, 189, 0.5)'; // Cambiado a rgba con 50% de opacidad
+            bodyElement.classList.add('highlights-background');
+        });
+
+        fototeca.addEventListener('click', function(e) {
+            e.preventDefault();
+            contenidoOriginal.style.display = 'none';
+            contenidoHighlights.style.display = 'none';
+            contenidoFototeca.style.display = 'block';
+            contenidoCartaBonita.style.display = 'none';
+            bodyElement.style.backgroundColor = '#9dac9d';
+            removeHighlightsBackground();
+            
+            // Cargar las fotos si aún no se han cargado
+            if (document.querySelector('.fototeca-container').childElementCount === 0) {
+                cargarFototeca();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const fotoContainers = document.querySelectorAll('.foto-container');
+            let flippedContainer = null;
+
+            fotoContainers.forEach(container => {
+                container.addEventListener('click', function() {
+                    if (flippedContainer && flippedContainer !== this) {
+                        flippedContainer.classList.remove('flipped');
+                    }
+                    
+                    this.classList.toggle('flipped');
+                    
+                    if (this.classList.contains('flipped')) {
+                        flippedContainer = this;
+                    } else {
+                        flippedContainer = null;
+                    }
+                });
+            });
+        });
+
+        // Añade esto para remover la clase cuando se cambia a otras pestañas
+        function removeHighlightsBackground() {
+            bodyElement.classList.remove('highlights-background');
+        }
+
+        felizAniversario.addEventListener('click', function(e) {
+            // ... código existente ...
+            removeHighlightsBackground();
+        });
+
+        // Función para cargar las fotos en la fototeca
+        function cargarFototeca() {
+            const fototecaContainer = document.querySelector('.fototeca-container');
+            const numeroFotos = 48;
+
+            for (let i = 1; i <= numeroFotos; i++) {
+                const img = document.createElement('img');
+                img.src = `./imagenes/fototeca${i}.jpg`; // Asegúrate de que las imágenes existan en esta ruta
+                img.alt = `Foto ${i}`;
+                img.className = 'foto-album';
+                fototecaContainer.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
